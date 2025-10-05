@@ -1,0 +1,438 @@
+:root{
+  --nav-width: 240px;
+  --accent-blue: #0b3d91;
+  --nav-dark: #0f1724;
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+  --shadow: 0 6px 18px rgba(14,20,30,0.08);
+  --aqi: 78; /* change this to reflect different AQI values */
+  --gcolor: #f59e0b; /* set gauge color (green/yellow/orange/red) */
+  --max-page-width: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #063f019c;
+  color: #0f1724;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+header.app-header {
+  background: #32620e;
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: var(--max-page-width);
+  margin: 0 auto;
+  width: 100%;
+}
+.logo {
+  width: 54px;
+  height: 54px;
+  background: #9dcd5a;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+.title {
+  flex: 1;
+}
+.title h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.4px;
+  font-weight: 800;
+}
+.title p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.95;
+  color: #e6eefc;
+  margin-top: 4px;
+}
+
+.hamburger {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+}
+
+/* Layout */
+.page {
+  max-width: var(--max-page-width);
+  margin: 22px auto;
+  display: grid;
+  grid-template-columns: minmax(200px, var(--nav-width)) 1fr;
+  gap: 18px;
+  padding: 0 12px;
+  min-height: calc(100vh - 110px);
+}
+
+/* Sidebar */
+nav.sidebar {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  height: calc(100vh - 160px);
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar .top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.sidebar h3 {
+  margin: 0;
+  font-size: 16px;
+}
+.nav-list {
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+  flex-grow: 1;
+}
+.nav-list li {
+  margin: 10px 0;
+}
+.nav-list a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #0f1724;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+.nav-list a.active,
+.nav-list a:hover {
+  background: #32620e;
+  color: white;
+  box-shadow: 0 6px 16px rgba(11, 61, 145, 0.12);
+}
+
+/* Main content area */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+  min-width: 0; /* prevent overflow */
+}
+
+/* Left column - central content */
+.main-left {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+/* Top row: gauge + metrics */
+.top-row {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 18px;
+}
+
+/* Card base */
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  min-width: 0; /* prevent overflow */
+}
+
+/* AQI Gauge card */
+.gauge-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gauge-wrap {
+  width: 220px;
+  height: 110px;
+  overflow: hidden;
+  position: relative;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.gauge-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  transform: rotate(-90deg);
+  background: conic-gradient(var(--gcolor) calc(var(--aqi) * 1.8deg), #e9eef5 0);
+  position: relative;
+}
+.gauge-inner {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  font-weight: 800;
+  font-size: 36px;
+  color: #0f1724;
+}
+.gauge-label {
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* small metric cards row */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 12px;
+}
+.metric {
+  padding: 12px 8px;
+  min-width: 0;
+}
+.metric h4 {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.metric p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Big map */
+.map-card {
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 12px;
+  min-width: 0;
+}
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fef3c7, #d1fae5 60%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+.pin {
+  width: 18px;
+  height: 26px;
+  background: #0b66d1;
+  border-radius: 9px 9px 9px 9px;
+  position: absolute;
+  left: 58%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 6px 14px rgba(11, 102, 209, 0.18);
+}
+
+/* Right column cards (forecast, alerts, summary) */
+.main-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+.forecast-days {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+.forecast-days::-webkit-scrollbar {
+  height: 6px;
+}
+.forecast-days::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+.day {
+  text-align: center;
+  flex: 0 0 72px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fbfdff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+.day small {
+  display: block;
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+/* Alert box */
+.alert-box {
+  background: linear-gradient(180deg, #fff7ed, #fee2e2);
+  padding: 14px;
+  border-radius: 8px;
+  color: #7f1d1d;
+  border-left: 6px solid #ef4444;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+/* Summary */
+.summary small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* bottom footer-wide summary card */
+.full-summary {
+  grid-column: 1 / -1;
+  padding: 16px;
+  background: linear-gradient(180deg, #fff, #fbfdff);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  color: #0f1724;
+  margin-top: 6px;
+  min-width: 0;
+}
+
+/* Responsive adjustments */
+
+/* Tablets (up to 980px) */
+@media (max-width: 980px) {
+  .page {
+    grid-template-columns: 1fr;
+    margin: 12px;
+  }
+
+  nav.sidebar {
+    height: auto;
+    position: relative;
+    top: 0;
+    flex-direction: row;
+    padding: 8px 12px;
+    overflow-x: auto;
+    gap: 12px;
+    border-radius: 10px 10px 0 0;
+  }
+  .sidebar .top {
+    display: none; /* hide sidebar title on small screens */
+  }
+  .nav-list {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    flex-grow: 1;
+    padding: 0;
+  }
+  .nav-list li {
+    margin: 0;
+  }
+  .nav-list a {
+    padding: 8px 12px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+  .top-row {
+    grid-template-columns: 1fr;
+  }
+  .metrics-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .main-right {
+    order: 2;
+  }
+  .main-left {
+    order: 1;
+  }
+}
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+  .top-row,
+  .metrics-row {
+    gap: 12px;
+  }
+
+  .top-row {
+    grid-template-columns: 1fr;
+  }
+
+  .gauge-card {
+    justify-content: center;
+  }
+
+  .gauge-wrap {
+    width: 180px;
+    height: 90px;
+  }
+
+  .gauge-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .gauge-inner {
+    width: 130px;
+    height: 130px;
+    left: 25px;
+    top: 25px;
+    font-size: 28px;
+  }
+
+  .metrics-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .main-left,
+  .main-right {
+    order: unset;
+  }
+
+  .forecast-days {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+  }
+}

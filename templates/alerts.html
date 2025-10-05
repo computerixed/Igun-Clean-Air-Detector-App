@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGUN AIR DETECTOR - Alerts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Background Motion */
+        body {
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #e3f6fd, #ffffff);
+            overflow-x: hidden;
+            font-family: "Inter", sans-serif;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(50,98,14,0.15), transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0,180,255,0.15), transparent 50%);
+            animation: moveBg 12s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+        @keyframes moveBg {
+            from { background-position: 0% 0%; }
+            to { background-position: 100% 100%; }
+        }
+
+        /* Brand */
+        .brand-green { color: #32620e; }
+        .card { border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        .alert-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .alert-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        .alert-high { border-left: 5px solid #dc3545; }
+        .alert-medium { border-left: 5px solid #fd7e14; }
+        .alert-low { border-left: 5px solid #ffc107; }
+        .alert-info { border-left: 5px solid #0dcaf0; }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Hamburger Menu Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Brand and Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="/static/logo.png" alt="IGUN logo" width="80" class="rounded-circle me-2">
+                <div>
+                    <h1 class="h5 m-0 text-white">IGUN AIR DETECTOR</h1>
+                    <p class="m-0 text-muted">2025 SPACE APPS CHALLENGE</p>
+                </div>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebarOffcanvas">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Air Quality</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="d-flex align-items-center mb-3">
+            <div class="me-3 fs-3 text-white">A</div>
+            <div>
+                <h3 class="h6 text-white m-0">Air Quality</h3>
+                <div class="small text-muted">Dashboard</div>
+            </div>
+        </div>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="/" class="nav-link text-white">
+                    <i class="bi bi-house-door me-2"></i>Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/dashboard" class="nav-link text-white">
+                    <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/about" class="nav-link text-white">
+                    <i class="bi bi-info-circle me-2"></i>About
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/share-with-us" class="nav-link text-white">
+                    <i class="bi bi-share me-2"></i>Share With Us
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/alerts" class="nav-link active">
+                    <i class="bi bi-bell me-2"></i>Alerts
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid p-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold brand-green">AIR QUALITY ALERTS</h2>
+        <div class="text-muted">NASA Space Apps 2025</div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Main Alert Content -->
+        <div class="col-lg-8">
+            <!-- Current Alert Status -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h4 class="mb-0">Current Alert Status</h4>
+                        <span class="badge bg-warning fs-6">Active Monitoring</span>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4 text-center">
+                            <div class="h2 text-success mb-1">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <div class="fw-bold">Air Quality</div>
+                            <div class="text-muted small">Good - Moderate</div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="h2 text-info mb-1">
+                                <i class="bi bi-cloud-sun"></i>
+                            </div>
+                            <div class="fw-bold">Weather</div>
+                            <div class="text-muted small">Clear Conditions</div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="h2 text-warning mb-1">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+                            <div class="fw-bold">Sensitivity</div>
+                            <div class="text-muted small">Monitor for Changes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Alerts -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Alerts</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item alert-card alert-medium">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-bold">
+                                        <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+                                        Air Quality Advisory
+                                    </h6>
+                                    <p class="mb-1">PM2.5 levels elevated for sensitive groups. Consider limiting outdoor activities.</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>2 hours ago
+                                        <i class="bi bi-geo-alt ms-3 me-1"></i>Your Location
+                                    </small>
+                                </div>
+                                <span class="badge bg-warning">Medium</span>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item alert-card alert-info">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-bold">
+                                        <i class="bi bi-info-circle text-info me-2"></i>
+                                        Weather Update
+                                    </h6>
+                                    <p class="mb-1">Favorable wind conditions improving air circulation in your area.</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>4 hours ago
+                                        <i class="bi bi-geo-alt ms-3 me-1"></i>Regional
+                                    </small>
+                                </div>
+                                <span class="badge bg-info">Info</span>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item alert-card alert-high">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-bold">
+                                        <i class="bi bi-shield-exclamation text-danger me-2"></i>
+                                        Health Alert (Resolved)
+                                    </h6>
+                                    <p class="mb-1">High NO₂ concentrations detected from TEMPO satellite data. Levels have since normalized.</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>Yesterday, 3:30 PM
+                                        <i class="bi bi-geo-alt ms-3 me-1"></i>Downtown Area
+                                    </small>
+                                </div>
+                                <span class="badge bg-success">Resolved</span>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item alert-card alert-low">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-bold">
+                                        <i class="bi bi-eye text-warning me-2"></i>
+                                        Monitoring Notice
+                                    </h6>
+                                    <p class="mb-1">NASA TEMPO mission detected minor air quality fluctuations. Continued monitoring in progress.</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>Yesterday, 10:15 AM
+                                        <i class="bi bi-geo-alt ms-3 me-1"></i>Metropolitan Area
+                                    </small>
+                                </div>
+                                <span class="badge bg-secondary">Monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Information -->
+        <div class="col-lg-4">
+            <!-- Alert Settings -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-gear me-2"></i>Alert Settings
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="healthAlerts" checked>
+                        <label class="form-check-label" for="healthAlerts">
+                            Health Alerts
+                        </label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="weatherUpdates" checked>
+                        <label class="form-check-label" for="weatherUpdates">
+                            Weather Updates
+                        </label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="tempoAlerts">
+                        <label class="form-check-label" for="tempoAlerts">
+                            TEMPO Satellite Alerts
+                        </label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="forecastAlerts" checked>
+                        <label class="form-check-label" for="forecastAlerts">
+                            Forecast Notifications
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert Statistics -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-bar-chart me-2"></i>Alert Statistics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6 mb-3">
+                            <div class="h4 text-danger">3</div>
+                            <div class="small text-muted">High Priority</div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="h4 text-warning">12</div>
+                            <div class="small text-muted">Medium Priority</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="h4 text-info">28</div>
+                            <div class="small text-muted">Low Priority</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="h4 text-success">15</div>
+                            <div class="small text-muted">Resolved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-telephone me-2"></i>Emergency Info
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="fw-bold">Health Emergency</div>
+                        <div class="text-muted">Call emergency services if experiencing severe respiratory symptoms</div>
+                        <div class="text-danger fw-bold">Emergency: 911</div>
+                    </div>
+                    <div>
+                        <div class="fw-bold">Air Quality Hotline</div>
+                        <div class="text-muted">For non-emergency air quality concerns</div>
+                        <div class="text-info">1-800-AIR-QUALITY</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Auto-refresh alerts every 5 minutes
+    setInterval(function() {
+        // In a real app, you'd fetch new alerts from the server
+        console.log('Checking for new alerts...');
+    }, 300000);
+
+    // Alert settings toggle functionality
+    document.querySelectorAll('.form-check-input').forEach(function(toggle) {
+        toggle.addEventListener('change', function() {
+            console.log(`${this.id} alerts: ${this.checked ? 'enabled' : 'disabled'}`);
+            // In a real app, you'd save these preferences to the server
+        });
+    });
+</script>
+
+</body>
+</html>

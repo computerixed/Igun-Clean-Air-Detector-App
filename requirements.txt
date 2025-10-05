@@ -1,0 +1,38 @@
+# Production WSGI server for Google Cloud Run
+gunicorn==21.2.0
+
+# Core web framework
+Flask==3.1.2
+Werkzeug==3.1.3
+
+# HTTP requests for NASA APIs and weather data
+requests==2.32.3
+
+# NASA NetCDF data processing
+netCDF4==1.7.2
+
+# Numerical computing for data processing
+numpy==2.2.6
+
+# AI/ML API client (Groq)
+groq==0.31.1
+
+# Environment variable management
+python-dotenv==1.1.1
+
+# Essential dependencies
+certifi==2025.4.26
+charset-normalizer==3.4.2
+click==8.1.8
+idna==3.10
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+urllib3==2.4.0
+
+# NetCDF4 dependencies for Google Cloud
+cftime==1.6.4.post1
+
+# Additional production dependencies
+python-dateutil==2.9.0.post0
+pytz==2025.2
